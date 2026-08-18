@@ -2,6 +2,7 @@
 #define CONTROL_HPP
 
 #include "rclcpp/rclcpp.hpp"
+#include "nav_msgs/msg/occupancy_grid.hpp"
 #include "saye_msgs/msg/map.hpp"
 #include "saye_msgs/srv/share_map.hpp"
 
@@ -92,7 +93,7 @@ void Control::sub_callback(saye_msgs::msg::Map::SharedPtr msg)
     // gazebo dan laser verisi alınacak ve işlenecek. merged map oluşturulacak.
     RCLCPP_ERROR(get_logger(), "data: %d", msg->header.stamp.sec);
 }
-void Control::service_callback(const saye_msgs::srv::ShareMap::Request::SharedPtr request, const saye_msgs::srv::ShareMap::Response::SharedPtr response)
+void Control::service_callback(const saye_msgs::srv::ShareMap::Request::SharedPtr /*request*/, const saye_msgs::srv::ShareMap::Response::SharedPtr response)
 {
     auto merged_map = nav_msgs::msg::OccupancyGrid(); // TODO: merged map paylaşılacak.
     response->custom_occupany_grid = merged_map;
