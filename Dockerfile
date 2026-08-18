@@ -18,7 +18,6 @@ RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pk
 
 RUN apt-get update -qq \
     && apt-get install -y \
-        gz-${GZ_VERSION} \
         build-essential \
         python3-pip \
         ros-${ROS_DISTRO}-rcl-interfaces \
@@ -29,13 +28,17 @@ RUN apt-get update -qq \
         ros-${ROS_DISTRO}-vision-msgs \
         ros-${ROS_DISTRO}-actuator-msgs \
         ros-${ROS_DISTRO}-image-transport \
-        ros-${ROS_DISTRO}-nav2* \
-        ros-${ROS_DISTRO}-behaviortree-cpp-v3 \
+        ros-${ROS_DISTRO}-nav2-bringup \
+        ros-${ROS_DISTRO}-navigation2 \
+        ros-${ROS_DISTRO}-slam-toolbox \
+        ros-${ROS_DISTRO}-joint-state-publisher \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p ${COLCON_WS_SRC}\
-    && git clone https://github.com/alitekes1/ackermann-vehicle-gzsim-ros2.git ${COLCON_WS_SRC}/ackermann-vehicle-gzsim-ros2 \
-    && cd ${COLCON_WS}\
+RUN mkdir -p ${COLCON_WS_SRC}
+
+COPY . ${COLCON_WS_SRC}/ackermann-vehicle-gzsim-ros2
+
+RUN cd ${COLCON_WS}\
     && . /opt/ros/${ROS_DISTRO}/setup.sh\
     && colcon build
 

@@ -16,6 +16,7 @@ find_package(rclpy REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 find_package(saye_msgs REQUIRED)
 find_package(nav2_msgs REQUIRED)
 include_directories(include)
@@ -26,10 +27,10 @@ install(
 )
 
 add_executable(main src/main.cpp)
-ament_target_dependencies(main rclcpp saye_msgs sensor_msgs)
+ament_target_dependencies(main rclcpp saye_msgs nav_msgs sensor_msgs)
 
 add_executable(client src/client.cpp)
-ament_target_dependencies(client rclcpp saye_msgs )
+ament_target_dependencies(client rclcpp saye_msgs nav_msgs)
 
 install(
   TARGETS 
