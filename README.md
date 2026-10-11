@@ -85,26 +85,8 @@ This project features the simulation of a custom vehicle with **Ackermann steeri
    `git clone https://github.com/alitekes1/ackermann-vehicle-gzsim-ros2`<br>`cd ..`
 2. Build the project:
    `colcon build && source install/setup.bash`
-3. Set environment variables:
-   ```bash
-   # Set environment variables for current session
-   export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/your/path/ackermann_sim/src/ackermann-vehicle-gzsim-ros2/
-   export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/your/path/ackermann_sim/src/ackermann-vehicle-gzsim-ros2/
-   ```
-
-   **For Permanent Setup:**
-   
-   To make these environment variables permanent, add them to your `.bashrc` file:
-   ```bash
-   # Add environment variables to .bashrc
-   echo 'export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/your/path/ackermann_sim/src/ackermann-vehicle-gzsim-ros2/' >> ~/.bashrc
-   echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/your/path/ackermann_sim/src/ackermann-vehicle-gzsim-ros2/' >> ~/.bashrc
-   
-   # Apply changes
-   source ~/.bashrc
-   ```
-
-   > **Note:** Replace `/your/path/` with your actual installation path.
+3. `GZ_SIM_RESOURCE_PATH` is set automatically when you source the workspace (`source install/setup.bash`);
+   no manual environment variables are needed. If you open a new terminal, just source the workspace again.
 
 ## Docker Installation
 
