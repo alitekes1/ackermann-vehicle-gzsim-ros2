@@ -10,7 +10,6 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>joint_state_publisher</depend>
   <depend>ros_gz</depend>
   <depend>sdformat_urdf</depend>
   <depend>saye_description</depend>

@@ -1,6 +1,0 @@
-nav2_msgs/CostmapMetaData costmap_meta_data
-nav2_msgs/Costmap costmap
-nav_msgs/OccupancyGrid occupancy_grid
-nav_msgs/MapMetaData map_meta_data
-nav_msgs/Path path
-std_msgs/Header header

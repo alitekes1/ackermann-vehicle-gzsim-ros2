@@ -4,7 +4,7 @@ This project features the simulation of a custom vehicle with **Ackermann steeri
 
 | **3D LiDAR Point Cloud Visualization** | **Warehouse Environment Model** |
 | ----- | ----- |
-| ![3D Point Cloud](saye_msgs/readme_files/3d_lidar_pointcloud.png) | ![Warehouse Model](saye_msgs/readme_files/warehouse_environment.png) |
+| ![3D Point Cloud](docs/images/3d_lidar_pointcloud.png) | ![Warehouse Model](docs/images/warehouse_environment.png) |
 
 ### If you like this project, consider giving it a ⭐ to show your support!
 
@@ -189,7 +189,7 @@ You can also run the simulation using Docker, which ensures a consistent environ
 
 | **3D LiDAR Point Cloud Visualization**                             | **Warehouse Environment Model**                                   |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| ![3D Point Cloud](saye_msgs/readme_files/3d_lidar_pointcloud.png) | ![Warehouse Model](saye_msgs/readme_files/warehouse_environment.png) |
+| ![3D Point Cloud](docs/images/3d_lidar_pointcloud.png) | ![Warehouse Model](docs/images/warehouse_environment.png) |
 
 ### Vehicle & Navigation
 
@@ -197,11 +197,11 @@ You can also run the simulation using Docker, which ensures a consistent environ
 | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | ![Screenshot from 2024-09-23 00-13-03.png](https://github.com/user-attachments/assets/1d2b56f7-34c1-4b01-9a85-fb01ceab5bd6) | ![Screenshot from 2024-09-23 00-09-04.png](https://github.com/user-attachments/assets/ba6853fd-4143-4b4d-bbc6-072895e4c75e) |
 | ![Screenshot from 2024-09-23 00-12-13.png](https://github.com/user-attachments/assets/477cce7b-995b-471e-a684-4d82bee0fc34) | ![Screenshot from 2024-09-23 00-15-04.png](https://github.com/user-attachments/assets/bf9ad916-14a6-4b62-a799-4169a767e4dd) |
-| ![alt text](saye_msgs/readme_files/saye.png)                                                                                         | ![alt text](saye_msgs/readme_files/rviz_saye.png)                                                                                    |
+| ![alt text](docs/images/saye.png)                                                                                         | ![alt text](docs/images/rviz_saye.png)                                                                                    |
 
 ## TF Tree
 
-![TF Tree](saye_msgs/readme_files/frames.png)
+![TF Tree](docs/images/frames.png)
 
 ---
 

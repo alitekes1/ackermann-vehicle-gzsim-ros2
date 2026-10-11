@@ -20,7 +20,6 @@ install(DIRECTORY
   models
   worlds
   hooks
-  launch
   DESTINATION share/${PROJECT_NAME}/
 )
 
