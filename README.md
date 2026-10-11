@@ -69,7 +69,7 @@ This project features the simulation of a custom vehicle with **Ackermann steeri
 
 ## Requirements
 
-- **ROS2 (Humble)**
+- **ROS2 (Humble or Jazzy)** — the Docker image is built on Jazzy
 - **Gazebo Sim Harmonic**
 - **RViz2**
 - **Nav2**
@@ -78,7 +78,8 @@ This project features the simulation of a custom vehicle with **Ackermann steeri
 
 0. Your need to sure that installation of Gazebo Harmonic and ROS (ros_gz):<br>
    `sudo apt-get install ros-${ROS_DISTRO}-ros-gz`<br>
-   `sudo apt-get install ros-humble-ros-gzharmonic` (Only Humble version)<br>
+   `sudo apt-get install ros-humble-ros-gzharmonic` (Humble only)<br>
+   `sudo apt-get install ros-${ROS_DISTRO}-teleop-twist-keyboard ros-${ROS_DISTRO}-joy` (manual control)<br>
    More details about installation Gazebo and ROS: <a href="https://gazebosim.org/docs/latest/ros_installation/">Link</a>
 1. Clone the repository:<br>
    `mkdir -p ackermann_sim/src && cd ackermann_sim/src`<br>
@@ -136,12 +137,12 @@ You can also run the simulation using Docker, which ensures a consistent environ
     ```bash
     ros2 run teleop_twist_keyboard teleop_twist_keyboard
     ```
-
     or with a gamepad (left stick -> `/cmd_vel`; the car stops if `/joy` is silent for 0.5 s, see the `joy_timeout` parameter):
     ```bash
     ros2 run joy joy_node
     ros2 run saye_control joystick_controller
     ```
+
 ### 2. SLAM (Simultaneous Localization and Mapping)
 
 -   To run SLAM Toolbox for mapping, launch the following after starting the simulation:
@@ -162,11 +163,12 @@ You can also run the simulation using Docker, which ensures a consistent environ
 
 ## Future Work
 
-1. **3D SLAM Support:**
+1. **3D SLAM Support**
+2. **Reinforcement Learning:**
    - Train the vehicle to handle complex scenarios autonomously using advanced DRL algorithms.
-2. **Enhanced Features:**
+3. **Enhanced Features:**
    - Explore additional sensor configurations and navigation strategies.
-3. **Nav2 entegration with 3D Localization**
+4. **Nav2 integration with 3D Localization**
    - Instead of AMCL(2D), more accurate and robust algorithms implementation.
 ## Gallery
 

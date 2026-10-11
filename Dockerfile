@@ -1,4 +1,4 @@
-ARG ROS_DISTRO
+ARG ROS_DISTRO=jazzy
 FROM ros:${ROS_DISTRO}
 
 ENV COLCON_WS=/root/colcon_ws
@@ -6,15 +6,13 @@ ENV COLCON_WS_SRC=/root/colcon_ws/src
 ENV PYTHONWARNINGS="ignore:setup.py install is deprecated::setuptools.command.install"
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG GZ_VERSION
-
 RUN apt-get update -qq \
     && apt-get install -y \
         wget git \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg \
-    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" > /etc/apt/sources.list.d/gazebo-stable.list
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" > /etc/apt/sources.list.d/gazebo-stable.list
 
 RUN apt-get update -qq \
     && apt-get install -y \
@@ -31,7 +29,9 @@ RUN apt-get update -qq \
         ros-${ROS_DISTRO}-nav2-bringup \
         ros-${ROS_DISTRO}-navigation2 \
         ros-${ROS_DISTRO}-slam-toolbox \
-        ros-${ROS_DISTRO}-joint-state-publisher \
+        ros-${ROS_DISTRO}-rviz2 \
+        ros-${ROS_DISTRO}-teleop-twist-keyboard \
+        ros-${ROS_DISTRO}-joy \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p ${COLCON_WS_SRC}
