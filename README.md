@@ -137,6 +137,11 @@ You can also run the simulation using Docker, which ensures a consistent environ
     ros2 run teleop_twist_keyboard teleop_twist_keyboard
     ```
 
+    or with a gamepad (left stick -> `/cmd_vel`; the car stops if `/joy` is silent for 0.5 s, see the `joy_timeout` parameter):
+    ```bash
+    ros2 run joy joy_node
+    ros2 run saye_control joystick_controller
+    ```
 ### 2. SLAM (Simultaneous Localization and Mapping)
 
 -   To run SLAM Toolbox for mapping, launch the following after starting the simulation:

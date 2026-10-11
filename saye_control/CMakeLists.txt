@@ -13,8 +13,7 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
-add_executable(joystick_controller src/main.cpp)
-target_include_directories(joystick_controller PRIVATE include)
+add_executable(joystick_controller src/joystick_controller.cpp)
 ament_target_dependencies(joystick_controller rclcpp sensor_msgs geometry_msgs)
 
 install(TARGETS joystick_controller DESTINATION lib/${PROJECT_NAME})
