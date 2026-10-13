@@ -4,7 +4,7 @@ This project features the simulation of a custom vehicle with **Ackermann steeri
 
 | **3D LiDAR Point Cloud Visualization** | **Warehouse Environment Model** |
 | ----- | ----- |
-| ![3D Point Cloud](saye_msgs/readme_files/3d_lidar_pointcloud.png) | ![Warehouse Model](saye_msgs/readme_files/warehouse_environment.png) |
+| ![3D Point Cloud](docs/images/3d_lidar_pointcloud.png) | ![Warehouse Model](docs/images/warehouse_environment.png) |
 
 ### If you like this project, consider giving it a ⭐ to show your support!
 
@@ -69,7 +69,7 @@ This project features the simulation of a custom vehicle with **Ackermann steeri
 
 ## Requirements
 
-- **ROS2 (Humble)**
+- **ROS2 (Humble or Jazzy)** — the Docker image is built on Jazzy
 - **Gazebo Sim Harmonic**
 - **RViz2**
 - **Nav2**
@@ -78,33 +78,16 @@ This project features the simulation of a custom vehicle with **Ackermann steeri
 
 0. Your need to sure that installation of Gazebo Harmonic and ROS (ros_gz):<br>
    `sudo apt-get install ros-${ROS_DISTRO}-ros-gz`<br>
-   `sudo apt-get install ros-humble-ros-gzharmonic` (Only Humble version)<br>
+   `sudo apt-get install ros-humble-ros-gzharmonic` (Humble only)<br>
+   `sudo apt-get install ros-${ROS_DISTRO}-teleop-twist-keyboard ros-${ROS_DISTRO}-joy` (manual control)<br>
    More details about installation Gazebo and ROS: <a href="https://gazebosim.org/docs/latest/ros_installation/">Link</a>
 1. Clone the repository:<br>
    `mkdir -p ackermann_sim/src && cd ackermann_sim/src`<br>
    `git clone https://github.com/alitekes1/ackermann-vehicle-gzsim-ros2`<br>`cd ..`
 2. Build the project:
    `colcon build && source install/setup.bash`
-3. Set environment variables:
-   ```bash
-   # Set environment variables for current session
-   export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/your/path/ackermann_sim/src/ackermann-vehicle-gzsim-ros2/
-   export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/your/path/ackermann_sim/src/ackermann-vehicle-gzsim-ros2/
-   ```
-
-   **For Permanent Setup:**
-   
-   To make these environment variables permanent, add them to your `.bashrc` file:
-   ```bash
-   # Add environment variables to .bashrc
-   echo 'export GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH:/your/path/ackermann_sim/src/ackermann-vehicle-gzsim-ros2/' >> ~/.bashrc
-   echo 'export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/your/path/ackermann_sim/src/ackermann-vehicle-gzsim-ros2/' >> ~/.bashrc
-   
-   # Apply changes
-   source ~/.bashrc
-   ```
-
-   > **Note:** Replace `/your/path/` with your actual installation path.
+3. `GZ_SIM_RESOURCE_PATH` is set automatically when you source the workspace (`source install/setup.bash`);
+   no manual environment variables are needed. If you open a new terminal, just source the workspace again.
 
 ## Docker Installation
 
@@ -154,6 +137,11 @@ You can also run the simulation using Docker, which ensures a consistent environ
     ```bash
     ros2 run teleop_twist_keyboard teleop_twist_keyboard
     ```
+    or with a gamepad (left stick -> `/cmd_vel`; the car stops if `/joy` is silent for 0.5 s, see the `joy_timeout` parameter):
+    ```bash
+    ros2 run joy joy_node
+    ros2 run saye_control joystick_controller
+    ```
 
 ### 2. SLAM (Simultaneous Localization and Mapping)
 
@@ -175,11 +163,12 @@ You can also run the simulation using Docker, which ensures a consistent environ
 
 ## Future Work
 
-1. **3D SLAM Support:**
+1. **3D SLAM Support**
+2. **Reinforcement Learning:**
    - Train the vehicle to handle complex scenarios autonomously using advanced DRL algorithms.
-2. **Enhanced Features:**
+3. **Enhanced Features:**
    - Explore additional sensor configurations and navigation strategies.
-3. **Nav2 entegration with 3D Localization**
+4. **Nav2 integration with 3D Localization**
    - Instead of AMCL(2D), more accurate and robust algorithms implementation.
 ## Gallery
 
@@ -189,7 +178,7 @@ You can also run the simulation using Docker, which ensures a consistent environ
 
 | **3D LiDAR Point Cloud Visualization**                             | **Warehouse Environment Model**                                   |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| ![3D Point Cloud](saye_msgs/readme_files/3d_lidar_pointcloud.png) | ![Warehouse Model](saye_msgs/readme_files/warehouse_environment.png) |
+| ![3D Point Cloud](docs/images/3d_lidar_pointcloud.png) | ![Warehouse Model](docs/images/warehouse_environment.png) |
 
 ### Vehicle & Navigation
 
@@ -197,11 +186,11 @@ You can also run the simulation using Docker, which ensures a consistent environ
 | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | ![Screenshot from 2024-09-23 00-13-03.png](https://github.com/user-attachments/assets/1d2b56f7-34c1-4b01-9a85-fb01ceab5bd6) | ![Screenshot from 2024-09-23 00-09-04.png](https://github.com/user-attachments/assets/ba6853fd-4143-4b4d-bbc6-072895e4c75e) |
 | ![Screenshot from 2024-09-23 00-12-13.png](https://github.com/user-attachments/assets/477cce7b-995b-471e-a684-4d82bee0fc34) | ![Screenshot from 2024-09-23 00-15-04.png](https://github.com/user-attachments/assets/bf9ad916-14a6-4b62-a799-4169a767e4dd) |
-| ![alt text](saye_msgs/readme_files/saye.png)                                                                                         | ![alt text](saye_msgs/readme_files/rviz_saye.png)                                                                                    |
+| ![alt text](docs/images/saye.png)                                                                                         | ![alt text](docs/images/rviz_saye.png)                                                                                    |
 
 ## TF Tree
 
-![TF Tree](saye_msgs/readme_files/frames.png)
+![TF Tree](docs/images/frames.png)
 
 ---
 

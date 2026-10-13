@@ -26,7 +26,7 @@ amcl:
     recovery_alpha_fast: 0.0
     recovery_alpha_slow: 0.0
     resample_interval: 1
-    robot_model_type: "nav2_amcl::OmniMotionModel"
+    robot_model_type: "nav2_amcl::DifferentialMotionModel"
     save_pose_rate: 0.5
     sigma_hit: 0.2
     tf_broadcast: true
@@ -93,7 +93,7 @@ controller_server:
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
       time_steps: 56
-      model_dt: 0.05  # 匹配20Hz控制频率 (1/20 = 0.05)
+      model_dt: 0.05  # 1 / controller_frequency (20 Hz)
       batch_size: 2000
       ax_max: 3.0
       ax_min: -3.0
@@ -108,7 +108,7 @@ controller_server:
       wz_max: 1.9
       iteration_count: 1
       prune_distance: 1.7
-      transform_tolerance: 0.5  # 增加变换容错性
+      transform_tolerance: 0.5
       temperature: 0.3
       gamma: 0.015
       motion_model: "Ackermann"
@@ -116,7 +116,7 @@ controller_server:
       regenerate_noises: true
       
       AckermannConstraints:
-        min_turning_r: 0.2
+        min_turning_r: 0.55  # wheel_base/tan(steering_limit)=0.2255/tan(0.4)=0.53 m, + margin
         
       TrajectoryVisualizer:
         trajectory_step: 5
@@ -204,8 +204,7 @@ local_costmap:
       width: 3
       height: 3
       resolution: 0.05
-      # 使用footprint而不是robot_radius，更适合阿克曼车辆
-      footprint: "[[0.15, 0.045], [0.15, -0.045], [-0.15, -0.045], [-0.15, 0.045]]"
+      footprint: "[[0.15, 0.115], [0.15, -0.115], [-0.15, -0.115], [-0.15, 0.115]]"
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
@@ -240,8 +239,7 @@ global_costmap:
       publish_frequency: 1.0
       global_frame: map
       robot_base_frame: saye
-      # 使用footprint与local_costmap保持一致
-      footprint: "[[0.15, 0.045], [0.15, -0.045], [-0.15, -0.045], [-0.15, 0.045]]"
+      footprint: "[[0.15, 0.115], [0.15, -0.115], [-0.15, -0.115], [-0.15, 0.115]]"
       resolution: 0.05
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
@@ -300,20 +298,20 @@ planner_server:
       allow_unknown: true
       max_iterations: 1000000
       max_on_approach_iterations: 1000
-      max_planning_time: 10.0  # 增加规划时间以支持复杂机动
-      motion_model_for_search: "REEDS_SHEPP"  # 支持前进/后退的模型
+      max_planning_time: 10.0
+      motion_model_for_search: "REEDS_SHEPP"  # supports forward/backward motion
       angle_quantization_bins: 72
       analytic_expansion_ratio: 3.5
       analytic_expansion_max_length: 3.0
-      minimum_turning_radius: 0.20
-      reverse_penalty: 0.3  # 显著降低倒车惩罚，允许掉头时倒车
-      change_penalty: 0.1   # 降低方向改变惩罚
-      non_straight_penalty: 1.0  # 降低非直线惩罚
+      minimum_turning_radius: 0.55  # see AckermannConstraints.min_turning_r
+      reverse_penalty: 0.3  # low reverse penalty, allows reversing for U-turns
+      change_penalty: 0.1   # low direction-change penalty
+      non_straight_penalty: 1.0  # low non-straight penalty
       cost_penalty: 2.0
-      retrospective_penalty: 0.010  # 降低回溯惩罚
+      retrospective_penalty: 0.010  # low retrospective penalty
       lookup_table_size: 20.0
       cache_obstacle_heuristic: false
-      debug_visualizations: true  # 启用调试可视化
+      debug_visualizations: true  
       use_quadratic_cost_penalty: False
       downsample_obstacle_heuristic: True
 
