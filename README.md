@@ -106,18 +106,38 @@ You can also run the simulation using Docker, which ensures a consistent environ
    cd ackermann-vehicle-gzsim-ros2
    ```
 
-2. Build and run the Docker container:
+2. Allow the container to access your X server (needed once per session, for the GUI):
+   ```bash
+   xhost +local:docker
+   ```
+
+3. Build and run the Docker container (with GPU acceleration):
    ```bash
       docker run -it \
       --name ackermann_sim \
       --hostname ackermann_sim \
+      --gpus all \
+      --runtime=nvidia \
       --env="DISPLAY=$DISPLAY" \
       --env="QT_X11_NO_MITSHM=1" \
+      --env="NVIDIA_VISIBLE_DEVICES=all" \
+      --env="NVIDIA_DRIVER_CAPABILITIES=all" \
       --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
       --privileged alitekes1/ackermann_sim:latest
    ```
 
-3. If you want to additional terminal for same container
+   > **Note:** The `--gpus all --runtime=nvidia` flags require the
+   > [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+   > Without a GPU, Gazebo falls back to software rendering and runs very slowly.
+   > If you don't have an NVIDIA GPU, drop the `--gpus`, `--runtime` and
+   > `NVIDIA_*` lines to run on CPU rendering.
+
+   Alternatively, use Docker Compose (GPU is already configured in `docker-compose.yaml`):
+   ```bash
+   docker compose up --build
+   ```
+
+4. If you want to additional terminal for same container
    ```bash
       docker exec -it ackermann_sim bash
    ```
